@@ -26,8 +26,8 @@ export const fetchCampaignKeywords = createAsyncThunk(
 
 export const fetchAdGroupKeywords = createAsyncThunk(
   'keywords/fetchAdGroupKeywords',
-  async (adGroupId: number) => {
-    return await keywordApi.getAdGroupKeywords(adGroupId);
+  async ({ campaignId, adGroupId }: { campaignId: number; adGroupId: number }) => {
+    return await keywordApi.getAdGroupKeywords(campaignId, adGroupId);
   }
 );
 
@@ -40,15 +40,15 @@ export const createKeyword = createAsyncThunk(
 
 export const updateKeyword = createAsyncThunk(
   'keywords/updateKeyword',
-  async ({ id, data }: { id: number; data: UpdateKeywordData }) => {
-    return await keywordApi.updateKeyword(id, data);
+  async ({ id, campaignId, data }: { id: number; campaignId: number; data: UpdateKeywordData }) => {
+    return await keywordApi.updateKeyword(campaignId, id, data);
   }
 );
 
 export const deleteKeyword = createAsyncThunk(
   'keywords/deleteKeyword',
-  async (id: number) => {
-    await keywordApi.deleteKeyword(id);
+  async ({ id, campaignId }: { id: number; campaignId: number }) => {
+    await keywordApi.deleteKeyword(campaignId, id);
     return id;
   }
 );

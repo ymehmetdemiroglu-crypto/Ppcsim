@@ -30,15 +30,6 @@ export const errorHandler = (
     });
   }
 
-  // Validation errors
-  if (err.name === 'ValidationError') {
-    logger.error('Validation error:', err);
-    return res.status(400).json({
-      status: 'error',
-      message: err.message,
-    });
-  }
-
   // Default error
   logger.error('Unhandled error:', {
     error: err,

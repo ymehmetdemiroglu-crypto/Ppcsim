@@ -35,7 +35,7 @@ function AdGroupList({ campaignId }: AdGroupListProps) {
 
   const handleDelete = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this ad group?')) {
-      await dispatch(deleteAdGroup(id));
+      await dispatch(deleteAdGroup({ id, campaignId }));
     }
   };
 

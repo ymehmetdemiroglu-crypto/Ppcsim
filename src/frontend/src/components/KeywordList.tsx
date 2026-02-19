@@ -47,7 +47,7 @@ function KeywordList({ campaignId }: KeywordListProps) {
 
   const handleDelete = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this keyword?')) {
-      await dispatch(deleteKeyword(id));
+      await dispatch(deleteKeyword({ id, campaignId }));
     }
   };
 

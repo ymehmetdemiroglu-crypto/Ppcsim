@@ -76,6 +76,7 @@ function AdGroupFormDialog({
         await dispatch(
           updateAdGroup({
             id: adGroupId,
+            campaignId,
             data: {
               name: formData.name.trim(),
               defaultBid,

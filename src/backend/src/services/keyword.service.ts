@@ -28,8 +28,8 @@ export class KeywordService {
    * Create a new keyword
    */
   async createKeyword(data: CreateKeywordDto): Promise<Keyword> {
-    // Validate bid
-    if (data.bid <= 0) {
+    // Validate bid (negative keywords use bid=0 as they are exclusions, not bidding keywords)
+    if (!data.isNegative && data.bid <= 0) {
       throw new ValidationError('Bid must be greater than 0');
     }
 
@@ -123,10 +123,11 @@ export class KeywordService {
    */
   async updateKeyword(id: number, campaignId: number, data: UpdateKeywordDto): Promise<Keyword> {
     // Check if keyword exists and belongs to campaign
-    await this.getKeywordById(id, campaignId);
+    const existingKeyword = await this.getKeywordById(id, campaignId);
 
-    // Validate bid if provided
-    if (data.bid !== undefined && data.bid <= 0) {
+    // Validate bid if provided (negative keywords are exclusions and may have bid=0)
+    const willBeNegative = data.isNegative !== undefined ? data.isNegative : existingKeyword.isNegative;
+    if (data.bid !== undefined && !willBeNegative && data.bid <= 0) {
       throw new ValidationError('Bid must be greater than 0');
     }
 

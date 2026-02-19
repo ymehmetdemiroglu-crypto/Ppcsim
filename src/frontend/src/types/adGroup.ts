@@ -6,6 +6,10 @@ export interface AdGroup {
   status: 'ACTIVE' | 'PAUSED' | 'ARCHIVED';
   createdAt: string;
   updatedAt: string;
+  _count?: {
+    keywords: number;
+    products: number;
+  };
 }
 
 export interface CreateAdGroupData {

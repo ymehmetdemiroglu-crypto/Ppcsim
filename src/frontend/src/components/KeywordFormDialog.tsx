@@ -53,7 +53,7 @@ function KeywordFormDialog({
       if (keyword) {
         setFormData({
           keywordText: keyword.keywordText,
-          adGroupId: keyword.adGroupId.toString(),
+          adGroupId: keyword.adGroupId != null ? keyword.adGroupId.toString() : '',
           matchType: keyword.matchType,
           bid: keyword.bid.toString(),
           isNegative: keyword.isNegative,
@@ -105,6 +105,7 @@ function KeywordFormDialog({
         await dispatch(
           updateKeyword({
             id: keywordId,
+            campaignId,
             data: {
               keywordText: formData.keywordText.trim(),
               matchType: formData.matchType,

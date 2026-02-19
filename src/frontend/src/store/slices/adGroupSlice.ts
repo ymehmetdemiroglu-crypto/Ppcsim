@@ -33,15 +33,15 @@ export const createAdGroup = createAsyncThunk(
 
 export const updateAdGroup = createAsyncThunk(
   'adGroups/updateAdGroup',
-  async ({ id, data }: { id: number; data: UpdateAdGroupData }) => {
-    return await adGroupApi.updateAdGroup(id, data);
+  async ({ id, campaignId, data }: { id: number; campaignId: number; data: UpdateAdGroupData }) => {
+    return await adGroupApi.updateAdGroup(campaignId, id, data);
   }
 );
 
 export const deleteAdGroup = createAsyncThunk(
   'adGroups/deleteAdGroup',
-  async (id: number) => {
-    await adGroupApi.deleteAdGroup(id);
+  async ({ id, campaignId }: { id: number; campaignId: number }) => {
+    await adGroupApi.deleteAdGroup(campaignId, id);
     return id;
   }
 );

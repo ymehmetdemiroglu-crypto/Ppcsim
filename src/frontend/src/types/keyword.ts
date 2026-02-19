@@ -3,19 +3,24 @@ export type MatchType = 'BROAD' | 'PHRASE' | 'EXACT';
 export interface Keyword {
   id: number;
   campaignId: number;
-  adGroupId: number;
+  adGroupId?: number;
   keywordText: string;
   matchType: MatchType;
   bid: number;
   status: 'ACTIVE' | 'PAUSED' | 'ARCHIVED';
   isNegative: boolean;
+  impressions: string;
+  clicks: number;
+  conversions: number;
+  spend: string;
+  sales: string;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface CreateKeywordData {
   campaignId: number;
-  adGroupId: number;
+  adGroupId?: number;
   keywordText: string;
   matchType: MatchType;
   bid: number;
